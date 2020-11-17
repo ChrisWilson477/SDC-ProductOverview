@@ -42,6 +42,7 @@ class App extends React.Component {
                         return data.json();
                     })
                     .then(data => {
+                        //Calculating Avg Rating from reviews
                         var numOfRatings = 0;
                         var totalStars = 0;
                         for (var ratingKey in data.ratings) {
@@ -92,6 +93,8 @@ class App extends React.Component {
 }
 
 export default App;
+
+//****Greenfield API info below****
 
 // The API can currently be found at http://52.26.193.201:3000/ For example: http://52.26.193.201:3000/products/list.
 // In an HTTP GET request, parameters are sent as a query string:

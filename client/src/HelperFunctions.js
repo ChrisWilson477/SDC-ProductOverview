@@ -1,3 +1,5 @@
+//Just included in main App methods
+
 const getProductAndStyles = function() {
   fetch('http://52.26.193.201:3000/products/5')
     .then(data => {

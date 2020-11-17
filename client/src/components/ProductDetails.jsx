@@ -27,12 +27,23 @@ class ProductDetails extends React.Component {
   }
 
   changeStyleIndex(e) {
-    console.log(e.target.alt);
-    this.setState({styleIndex: e.target.value});
+    this.setState({styleIndex: JSON.parse(e.target.alt)});
   }
 
   addToCart(e) {
     console.log('adding to cart');
+    fetch(`http://52.26.193.201:3000/cart/1/${this.state.MAWproductData.id}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    })
+    .then(res => {
+      console.log(res);
+    })
+    .catch(err => {
+      console.log(err);
+    })
   }
 
   render() {
@@ -44,7 +55,7 @@ class ProductDetails extends React.Component {
           <StarRatings rating={this.state.MAWavgRating} starRatedColor='black' numberOfStars={5} name='rating' starDimension="20px" starSpacing="2px"/>
           <div>Category: {this.state.MAWproductData.category}</div>
           <h2>{this.state.MAWproductData.name}</h2>
-          <div>${this.state.MAWproductData.default_price}</div>
+          <div>${this.state.MAWstylesData.results[this.state.styleIndex].original_price}</div>
           <div>Style: {this.state.MAWstylesData.results[this.state.styleIndex].name}</div>
           <Container>
             <Row>
