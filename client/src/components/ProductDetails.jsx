@@ -32,6 +32,7 @@ class ProductDetails extends React.Component {
 
   addToCart(e) {
     console.log('adding to cart');
+    //POST request not working
     fetch(`http://52.26.193.201:3000/cart/1/${this.state.MAWproductData.id}`, {
       method: 'POST',
       headers: {
