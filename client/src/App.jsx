@@ -1,4 +1,3 @@
-// App.jsx
 import React from 'react';
 import helperFunctions from './HelperFunctions.js';
 import ProductParagraph from './components/ProductParagraph.jsx';

@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "front-end-capstone",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "jest --watch",
     "env": "npm install --save-dev @babel/preset-env",
