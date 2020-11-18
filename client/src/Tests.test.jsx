@@ -3,6 +3,10 @@ import ReactDOM from 'react-dom';
 import {render, cleanup, screen} from '@testing-library/react';
 import App from './App.jsx';
 import ProductDetails from './components/ProductDetails.jsx';
+import ProductParagraph from './components/ProductDetails.jsx';
+import ProductFactoids from './components/ProductDetails.jsx';
+import ProductPictures from './components/ProductDetails.jsx';
+import ProductHeader from './components/ProductDetails.jsx';
 
 //Hard-Coded Test Data for testing against product 5 data, tests below
 //alternate JSON.package script:     "test": "cd client/src/ && node Tests.jsx",
@@ -54,3 +58,48 @@ describe('Testing Product Details and Each Sub-Component', () => {
     expect(screen.getByText('Add To Cart')).toBeInTheDocument();
   });
 });
+
+//Product Paragraph Unit Tests
+describe('Testing Product Paragraph Subcomponent', () => {
+  beforeEach(() => render(<ProductParagraph MAWproductSlogan={product5MAWproductData.slogan} MAWproductDescription={product5MAWproductData.description}/>));
+  afterEach(cleanup);
+
+  test('Renders Product Slogan', () => {
+    expect(screen.getByText('A sneaker dynasty')).toBeInTheDocument();
+  });
+  test('Renders Product Description', () => {
+    expect(screen.getByText("Now where da boxes where I keep mine? You should peep mine, maybe once or twice but never three times. I'm just a sneaker pro, I love Pumas and shell toes, but can't nothin compare to a fresh crispy white pearl")).toBeInTheDocument();
+  });
+}
+
+//Product Factoids Unit Tests
+describe('Testing Product Factoids Subcomponent', () => {
+  beforeEach(() => render(<ProductFactoids MAWproductFactoids={product5MAWproductData.features}/>));
+  afterEach(cleanup);
+
+  test('Renders First Factoid', () => {
+    expect(screen.getByText('✓ Rubber Sole')).toBeInTheDocument();
+  });
+  test('Renders Last Factoid', () => {
+    expect(screen.getByText('✓ Double Stitch Stitching')).toBeInTheDocument();
+  });
+}
+
+//Header Unit Tests
+describe('Testing Header Subcomponent', () => {
+  beforeEach(() => render(<Header />));
+  afterEach(cleanup);
+
+  test('Renders Logo', () => {
+    expect(screen.getByText('nKings')).toBeInTheDocument();
+  });
+  test('Renders Discount Code Header', () => {
+    expect(screen.getByText('Deal! Deals! Deal! We Have the Best Deals! Very Special Price for You! -- Click HERE for 1% Off!')).toBeInTheDocument();
+  });
+  test('Renders Glyphicon', () => {
+    //To be completed
+  });
+  test('Test Input Box with fire method', () => {
+    //To be completed
+  });
+}
