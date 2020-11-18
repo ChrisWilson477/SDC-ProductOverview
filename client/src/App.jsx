@@ -4,10 +4,11 @@ import ProductParagraph from './components/ProductParagraph.jsx';
 import ProductDetails from './components/ProductDetails.jsx';
 import ProductPictures from './components/ProductPictures.jsx';
 import ProductFactoids from './components/ProductFactoids.jsx';
+import Header from './components/Header.jsx';
 import StarRatings from 'react-star-ratings';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 
-class App extends React.Component {
+class ProductOverview extends React.Component {
     constructor() {
         super();
         this.state = {
@@ -23,7 +24,6 @@ class App extends React.Component {
             return data.json();
             })
             .then(data => {
-                console.log(data);
                 this.setState({MAWproductData: data})
             })
             .then(() => {
@@ -77,13 +77,16 @@ class App extends React.Component {
         return (
             <div>
                 <Container>
+                    <Col className=""><Header MAWproductData={this.state.MAWproductData} /></Col>
+                </Container>
+                <Container>
                     <Row>
-                        <Col className="block-example border border-dark mt-5"><ProductPictures MAWstylesData={this.state.MAWstylesData} /></Col>
-                        <Col sm={{ span: 5, offset: 1 }} className="block-example border border-dark mt-5"><ProductDetails MAWproductData={this.state.MAWproductData} MAWstylesData={this.state.MAWstylesData} MAWavgRating={this.state.MAWavgRating}/></Col>
+                        <Col className="mt-5"><ProductPictures MAWstylesData={this.state.MAWstylesData} /></Col>
+                        <Col sm={{ span: 5, offset: 1 }} className="border border-dark mt-5"><ProductDetails MAWproductData={this.state.MAWproductData} MAWstylesData={this.state.MAWstylesData} MAWavgRating={this.state.MAWavgRating}/></Col>
                     </Row>
                     <Row>
-                        <Col className="block-example mt-5"><ProductParagraph MAWproductSlogan={this.state.MAWproductData.slogan} MAWproductDescription={this.state.MAWproductData.description}/></Col>
-                        <Col sm={{ span: 5, offset: 1 }} className="block-example border border-dark mt-5"><ProductFactoids MAWproductID={this.state.MAWcurrentProduct} /></Col>
+                        <Col className="mt-5"><ProductParagraph MAWproductSlogan={this.state.MAWproductData.slogan} MAWproductDescription={this.state.MAWproductData.description}/></Col>
+                        <Col sm={{ span: 5, offset: 1 }} className="border-left border-dark mt-5"><ProductFactoids MAWproductFactoids={this.state.MAWproductData.features} /></Col>
                     </Row>
                 </Container>
             </div>
@@ -91,7 +94,7 @@ class App extends React.Component {
     }
 }
 
-export default App;
+export default ProductOverview;
 
 //****Greenfield API info below****
 
