@@ -15,11 +15,13 @@ class ProductOverview extends React.Component {
             MAWcurrentProduct: 5,
             MAWproductData: {},
             MAWstylesData: {},
-            MAWavgRating: -1
+            MAWavgRating: -1,
+            styleIndex: 0
         };
+        this.handleStyleIndexChange.bind(this);
     }
     componentDidMount() {
-        fetch('http://52.26.193.201:3000/products/5')
+        fetch(`http://52.26.193.201:3000/products/${this.state.MAWcurrentProduct}`)
             .then(data => {
             return data.json();
             })
@@ -27,7 +29,7 @@ class ProductOverview extends React.Component {
                 this.setState({MAWproductData: data})
             })
             .then(() => {
-                fetch('http://52.26.193.201:3000/products/5/styles')
+                fetch(`http://52.26.193.201:3000/products/${this.state.MAWcurrentProduct}/styles`)
                 .then(data => {
                     return data.json();
                 })
@@ -69,24 +71,28 @@ class ProductOverview extends React.Component {
             console.log(err);
             })
     }
-
+    handleStyleIndexChange(index) {
+        console.log('changing style');
+        console.log(index);
+        this.setState({styleIndex: index})
+    }
     render() {
         if (this.state.MAWavgRating === -1) {
             return (<div>Loading...</div>)
         }
         return (
             <div>
-                <Container>
-                    <Col className=""><Header MAWproductData={this.state.MAWproductData} /></Col>
+                <Container className='mb-4'>
+                    <Col sm={{ span: 12 }} className=""><Header MAWproductData={this.state.MAWproductData} /></Col>
                 </Container>
                 <Container>
                     <Row>
-                        <Col className="mt-5"><ProductPictures MAWstylesData={this.state.MAWstylesData} /></Col>
-                        <Col sm={{ span: 5, offset: 1 }} className="border border-dark mt-5"><ProductDetails MAWproductData={this.state.MAWproductData} MAWstylesData={this.state.MAWstylesData} MAWavgRating={this.state.MAWavgRating}/></Col>
+                        <Col className=''><ProductPictures MAWstylesData={this.state.MAWstylesData} styleIndex={this.state.styleIndex}/></Col>
+                        <Col sm={{ span: 5, offset: 0 }} className="border-left border-dark"><ProductDetails MAWproductData={this.state.MAWproductData} MAWstylesData={this.state.MAWstylesData} MAWavgRating={this.state.MAWavgRating} handleStyleIndexChange={this.handleStyleIndexChange.bind(this)}/></Col>
                     </Row>
-                    <Row>
-                        <Col className="mt-5"><ProductParagraph MAWproductSlogan={this.state.MAWproductData.slogan} MAWproductDescription={this.state.MAWproductData.description}/></Col>
-                        <Col sm={{ span: 5, offset: 1 }} className="border-left border-dark mt-5"><ProductFactoids MAWproductFactoids={this.state.MAWproductData.features} /></Col>
+                    <Row className='mt-4'>
+                        <Col className=''><ProductParagraph MAWproductSlogan={this.state.MAWproductData.slogan} MAWproductDescription={this.state.MAWproductData.description}/></Col>
+                        <Col sm={{ span: 5, offset: 0 }} className="border-left border-dark"><ProductFactoids MAWproductFactoids={this.state.MAWproductData.features} /></Col>
                     </Row>
                 </Container>
             </div>
@@ -95,22 +101,3 @@ class ProductOverview extends React.Component {
 }
 
 export default ProductOverview;
-
-//****Greenfield API info below****
-
-// The API can currently be found at http://52.26.193.201:3000/ For example: http://52.26.193.201:3000/products/list.
-// In an HTTP GET request, parameters are sent as a query string:
-
-// http://example.com/page?parameter=value&also=another
-
-// In an HTTP POST or PUT request, the parameters are not sent along with the URI, but in the request body. Parameters noted for each route below follow this standard.
-
-/**Specific Routes for Product Detail portion**
- * POST to '/cart/' with params (user_session - integer, product_id - integer) with 201 response code
- * POST to '/interactions/' with params (element - string, widget - string, time - string) with 201 or 422 reponse codes
- *      -should need for the 'star' widget next to 'add to bag' button
- * GET '/products/:product_id' with params (product_id - integer) with 200 response code
- * GET /products/:product_id/styles with params (product_id - integer) with 200 response code
- *      -includes pictures, sizes,
- * */
-

@@ -22,10 +22,13 @@
   "dependencies": {
     "bootstrap": "^4.5.3",
     "express": "^4.17.1",
+    "glyphicons": "^0.2.0",
     "nodemon": "^2.0.6",
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.0",
     "react-dom": "^17.0.1",
+    "react-native": "^0.63.3",
+    "react-native-web": "^0.14.8",
     "react-star-ratings": "^2.3.0"
   },
   "devDependencies": {

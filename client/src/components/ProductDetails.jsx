@@ -27,17 +27,20 @@ class ProductDetails extends React.Component {
   }
 
   changeStyleIndex(e) {
-    this.setState({styleIndex: JSON.parse(e.target.alt)});
+    this.setState({styleIndex: JSON.parse(e.target.alt)})
+    this.props.handleStyleIndexChange(JSON.parse(e.target.alt));
   }
 
   addToCart(e) {
     console.log('adding to cart');
-    //POST request not working
-    fetch(`http://52.26.193.201:3000/cart/1/${this.state.MAWproductData.id}`, {
+    fetch('http://52.26.193.201:3000/cart/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-      }
+        'Origin': 'http://localhost:3002',
+      },
+      body: {"user_session": "1",
+             "product_id": "10"}
     })
     .then(res => {
       console.log(res);
