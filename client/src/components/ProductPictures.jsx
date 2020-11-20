@@ -6,7 +6,8 @@ class ProductPictures extends React.Component {
     super(props);
     this.state = {
       selectedPicture: 0,
-      vertCarouselStartIndex: 0
+      vertCarouselStartIndex: 0,
+      zoom: false
     };
   }
   thumbnailClick(e) {
@@ -38,13 +39,14 @@ class ProductPictures extends React.Component {
     }
     this.setState({selectedPicture: (previousPicture + 1)})
   }
-
-
   //If the user hovers over the main image anywhere other than the thumbnails, the left arrow, or the right arrow, the mouse icon should change to show a magnifying glass.  If the user clicks on the image, the image gallery should change to the expanded view.
-  //add zoom in and zoom out
   zoomIn(e) {
     e.preventDefault();
-
+    this.setState({zoom: true})
+  }
+  zoomOut(e) {
+    e.preventDefault();
+    this.setState({zoom: false});
   }
 
   render() {
@@ -62,6 +64,16 @@ class ProductPictures extends React.Component {
     } else {
       rightChevron = null;
     }
+    var zoomedPicture;
+    if (this.state.zoom === true) {
+      zoomedPicture = <div>
+                        <img style={{position: 'absolute', top: '10px', left: '10px', width: '1200px', height: 'auto', zIndex: '3'}} src={this.props.MAWstylesData.results[this.props.styleIndex].photos[this.state.selectedPicture].url}/>
+                        <div className="glyphicon glyphicon-zoom-out" style={{display: 'inline-block', position: 'absolute', top: '20px', left: '1160px', zIndex: '3', color: 'white', fontSize: '40px'}} onClick={(e)=>{this.zoomOut(e)}}></div>
+                      </div>
+    } else {
+      zoomedPicture = null;
+    }
+
     return (
       <div className='text-center' style={{position: 'relative'}}>
         <img className='img-fluid' style={{position: 'absolute', top: '0px', left: '0px'}} src={this.props.MAWstylesData.results[this.props.styleIndex].photos[this.state.selectedPicture].url} />
@@ -108,6 +120,7 @@ class ProductPictures extends React.Component {
         <div className="glyphicon glyphicon-zoom-in" style={{display: 'inline-block', position: 'absolute', top: '20px', right: '20px', zIndex: '2', color: 'white', fontSize: '40px'}} onClick={(e)=>{this.zoomIn(e)}}></div>
         {leftChevron}
         {rightChevron}
+        {zoomedPicture}
       </div>
     );
   }
