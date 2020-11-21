@@ -37,10 +37,10 @@ class ProductDetails extends React.Component {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Origin': 'http://localhost:3002',
+        // 'Origin': 'http://localhost:3002'
       },
-      body: {"user_session": "1",
-             "product_id": "10"}
+      body: JSON.stringify({"user_session": "1",
+             "product_id": `${this.state.MAWproductData.id}`})
     })
     .then(res => {
       console.log(res);
