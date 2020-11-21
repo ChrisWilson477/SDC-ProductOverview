@@ -34,7 +34,6 @@ class ProductOverview extends React.Component {
                     return data.json();
                 })
                 .then(data => {
-                    console.log(data);
                     this.setState({MAWstylesData: data})
                 })
                 .then(() => {
@@ -86,9 +85,9 @@ class ProductOverview extends React.Component {
                     <Col sm={{ span: 12 }} className=""><Header MAWproductData={this.state.MAWproductData} /></Col>
                 </Container>
                 <Container>
-                    <Row>
+                    <Row className=''>
                         <Col className=''><ProductPictures MAWstylesData={this.state.MAWstylesData} styleIndex={this.state.styleIndex}/></Col>
-                        <Col sm={{ span: 5, offset: 0 }} className="border-left border-dark"><ProductDetails MAWproductData={this.state.MAWproductData} MAWstylesData={this.state.MAWstylesData} MAWavgRating={this.state.MAWavgRating} handleStyleIndexChange={this.handleStyleIndexChange.bind(this)}/></Col>
+                        <Col sm={{ span: 5, offset: 0 }} className=""><ProductDetails MAWproductData={this.state.MAWproductData} MAWstylesData={this.state.MAWstylesData} MAWavgRating={this.state.MAWavgRating} handleStyleIndexChange={this.handleStyleIndexChange.bind(this)}/></Col>
                     </Row>
                     <Row className='mt-4'>
                         <Col className=''><ProductParagraph MAWproductSlogan={this.state.MAWproductData.slogan} MAWproductDescription={this.state.MAWproductData.description}/></Col>

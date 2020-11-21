@@ -74,28 +74,22 @@ class ProductDetails extends React.Component {
             </Row>
           </Container>
           <Container>
-            <Row>
-              <Col className='mt-2 mr-2 mb-2'>
-                <select onChange={(e)=>this.changeSize(e)}>
+            <Row className='mt-4 mb-4'>
+                <select className='mr-3' onChange={(e)=>this.changeSize(e)}>
                   <option>Select Size</option>
                   {Object.keys(this.state.MAWstylesData.results[this.state.styleIndex].skus).map(size => {
                     return <option value={size}>{size}</option>
                   })}
                 </select>
-              </Col>
-              <Col className='mt-2 mr-2 mb-2'>
                 <select onChange={(e)=>this.changeQuantity(e)}>
                   <option>Select Quantity</option>
                   {this.state.quantityArray.map(num => {
                     return <option value={num}>{num}</option>
                   })}
                 </select>
-              </Col>
             </Row>
-            <Row>
-              <Col className='mt-2 mr-2 mb-2'>
+            <Row className='mt-3 mb-3'>
                 <button className='addToCart' onClick={(e)=>this.addToCart(e)}>Add To Cart</button>
-              </Col>
             </Row>
           </Container>
         </div>
