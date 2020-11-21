@@ -18,7 +18,7 @@ class ProductDetails extends React.Component {
   }
 
   changeSize(e) {
-    let sku = this.state.MAWstylesData.results[this.state.styleIndex].skus[e.target.value]
+    let sku = this.props.MAWstylesData.results[this.state.styleIndex].skus[e.target.value]
     this.setState({selectedSKU: sku, selectedSize: e.target.value})
   }
 
@@ -37,10 +37,9 @@ class ProductDetails extends React.Component {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        // 'Origin': 'http://localhost:3002'
       },
       body: JSON.stringify({"user_session": "1",
-             "product_id": `${this.state.MAWproductData.id}`})
+             "product_id": `${this.props.MAWproductData.id}`})
     })
     .then(res => {
       console.log(res);
@@ -51,22 +50,22 @@ class ProductDetails extends React.Component {
   }
 
   render() {
-    if (this.state.MAWproductData === undefined || this.state.MAWavgRating === undefined) {
+    if (this.props.MAWproductData === undefined || this.props.MAWavgRating === undefined) {
       return <div>Loading...</div>
     } else {
       return (
         <div>
-          <StarRatings rating={this.state.MAWavgRating} starRatedColor='black' numberOfStars={5} name='rating' starDimension="20px" starSpacing="2px"/>
-          <div>Category: {this.state.MAWproductData.category}</div>
-          <h2>{this.state.MAWproductData.name}</h2>
-          <div>${this.state.MAWstylesData.results[this.state.styleIndex].original_price}</div>
-          <div>Style: {this.state.MAWstylesData.results[this.state.styleIndex].name}</div>
+          <StarRatings rating={this.props.MAWavgRating} starRatedColor='black' numberOfStars={5} name='rating' starDimension="20px" starSpacing="2px"/>
+          <div>Category: {this.props.MAWproductData.category}</div>
+          <h2>{this.props.MAWproductData.name}</h2>
+          <div>${this.props.MAWstylesData.results[this.state.styleIndex].original_price}</div>
+          <div>Style: {this.props.MAWstylesData.results[this.state.styleIndex].name}</div>
           <Container>
             <Row>
-              {this.state.MAWstylesData.results.map((styleObj) => {
+              {this.props.MAWstylesData.results.map((styleObj) => {
                 let borderStyle = 'border border-dark mt-2 mb-2 mr-2 rounded-circle';
-                let index = this.state.MAWstylesData.results.indexOf(styleObj)
-                if (this.state.styleIndex === this.state.MAWstylesData.results.indexOf(styleObj)) {
+                let index = this.props.MAWstylesData.results.indexOf(styleObj)
+                if (this.state.styleIndex === this.props.MAWstylesData.results.indexOf(styleObj)) {
                   borderStyle = 'border border-success mt-2 mb-2 mr-2 rounded-circle'
                 };
                 return <img className={borderStyle} alt={index} style={{width: 60, height: 60}} src={styleObj.photos[0].thumbnail_url} onClick={(e)=>this.changeStyleIndex(e)}/>
@@ -77,7 +76,7 @@ class ProductDetails extends React.Component {
             <Row className='mt-4 mb-4'>
                 <select className='mr-3' onChange={(e)=>this.changeSize(e)}>
                   <option>Select Size</option>
-                  {Object.keys(this.state.MAWstylesData.results[this.state.styleIndex].skus).map(size => {
+                  {Object.keys(this.props.MAWstylesData.results[this.state.styleIndex].skus).map(size => {
                     return <option value={size}>{size}</option>
                   })}
                 </select>

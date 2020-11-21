@@ -14,7 +14,8 @@ class Header extends React.Component {
     console.log(e);
     this.setState({searchInput: e.target.value})
   }
-  changeProductID() {
+  changeProductID(e) {
+    e.preventDefault();
     this.props.handleProductChange(this.state.searchInput);
   }
 
@@ -30,7 +31,7 @@ class Header extends React.Component {
             <Col className='mt-2 mb-2' style={{textAlign: 'right'}}>
               <form>
                 <input type='number' name='searchID' placeholder='Search' onChange={(e)=>{this.setSearchInput(e)}}/>
-                <div className='glyphicon glyphicon-search ml-2' style={{position: 'relative', top: '5px', zIndex: '2', color: 'white', fontSize: '20px'}} onClick={this.changeProductID()}></div>
+                <div className='glyphicon glyphicon-search ml-2' style={{position: 'relative', top: '5px', zIndex: '2', color: 'white', fontSize: '20px'}} onClick={(e)=>{this.changeProductID(e)}}></div>
               </form>
             </Col>
           </Row >

@@ -83,8 +83,9 @@ class ProductOverview extends React.Component {
     }
 
     handleProductChange(id) {
+        console.log(id);
         this.getProductData(id);
-        this.setState({MAWcurrentProduct: id});
+        // this.setState({MAWcurrentProduct: id});
     }
 
     render() {
