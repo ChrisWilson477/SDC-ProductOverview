@@ -95,12 +95,12 @@ class ProductOverview extends React.Component {
         return (
             <div>
                 <Container className='mb-4'>
-                    <Col sm={{ span: 12 }} className=""><Header MAWproductData={this.state.MAWproductData} handleProductChange={this.handleProductChange.bind(this)}/></Col>
+                    <Col xs={{ span: 12 }} className=""><Header MAWproductData={this.state.MAWproductData} handleProductChange={this.handleProductChange.bind(this)}/></Col>
                 </Container>
                 <Container>
                     <Row className=''>
-                        <Col className=''><ProductPictures MAWstylesData={this.state.MAWstylesData} styleIndex={this.state.styleIndex}/></Col>
-                        <Col sm={{ span: 5, offset: 0 }} className=""><ProductDetails MAWproductData={this.state.MAWproductData} MAWstylesData={this.state.MAWstylesData} MAWavgRating={this.state.MAWavgRating} handleStyleIndexChange={this.handleStyleIndexChange.bind(this)}/></Col>
+                        <Col className='' xs={{span: 7}}><ProductPictures MAWstylesData={this.state.MAWstylesData} styleIndex={this.state.styleIndex}/></Col>
+                        <Col xs={{ span: 5 }} className=""><ProductDetails MAWproductData={this.state.MAWproductData} MAWstylesData={this.state.MAWstylesData} MAWavgRating={this.state.MAWavgRating} handleStyleIndexChange={this.handleStyleIndexChange.bind(this)}/></Col>
                     </Row>
                     <Row className='mt-4'>
                         <Col className=''><ProductParagraph MAWproductSlogan={this.state.MAWproductData.slogan} MAWproductDescription={this.state.MAWproductData.description}/></Col>

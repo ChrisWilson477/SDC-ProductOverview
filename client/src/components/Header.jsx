@@ -25,7 +25,7 @@ class Header extends React.Component {
     } else {
     return (
       <div>
-        <Container>
+        <Container className=''>
           <Row className='mb-2' style={{backgroundColor: '#454647'}}>
             <Col className='font-weight-bold' style={{fontSize: "28px", textAlign: 'left', fontStyle: 'italic', textDecorationLine: 'underline', color: 'white'}}>nKings</Col>
             <Col className='mt-2 mb-2' style={{textAlign: 'right'}}>
@@ -35,9 +35,11 @@ class Header extends React.Component {
               </form>
             </Col>
           </Row >
-          <Row style={{textAlign: 'center'}}>
-            <div className='' style={{fontSize: "14px", textAlign: 'center'}}>Deals! Deals! Deals! We Have the Best Deals! Very Special Price for You! -- Click <a href="javascript:alert('Just Kidding!');" className='font-weight-bold'>HERE</a> for 1% Off Discount Code!
-            </div>
+          <Row>
+            <Container className='container-fluid'>
+              <div className="text-center" style={{fontSize: "14px", textAlign: 'center'}}>Deals! Deals! Deals! We Have the Best Deals! Very Special Price for You! -- Click <a href="javascript:alert('Just Kidding!');" className='font-weight-bold'>HERE</a> for 1% Off Discount Code!
+              </div>
+            </Container>
           </Row>
         </Container>
       </div>
