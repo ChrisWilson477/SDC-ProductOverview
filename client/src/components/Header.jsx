@@ -37,7 +37,7 @@ class Header extends React.Component {
           </Row >
           <Row>
             <Container className='container-fluid'>
-              <div className="text-center" style={{fontSize: "14px", textAlign: 'center'}}>Deals! Deals! Deals! We Have the Best Deals! Very Special Price for You! -- Click <a href="javascript:alert('Just Kidding!');" className='font-weight-bold'>HERE</a> for 1% Off Discount Code!
+              <div className="text-center" style={{fontSize: "14px", textAlign: 'center'}}>Deals! Deals! Deals! We Have the Best Deals! Very Special Price! -- Click <a href="javascript:alert('Just Kidding!');" className='font-weight-bold'>HERE</a> for 1% Off Discount Code!
               </div>
             </Container>
           </Row>

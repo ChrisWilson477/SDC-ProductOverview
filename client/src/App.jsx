@@ -85,7 +85,8 @@ class ProductOverview extends React.Component {
     handleProductChange(id) {
         console.log(id);
         this.getProductData(id);
-        // this.setState({MAWcurrentProduct: id});
+        this.setState({styleIndex: 0});
+        console.log('changing style index to: ' + this.state.styleIndex);
     }
 
     render() {
@@ -99,12 +100,12 @@ class ProductOverview extends React.Component {
                 </Container>
                 <Container>
                     <Row className=''>
-                        <Col className='' xs={{span: 7}}><ProductPictures MAWstylesData={this.state.MAWstylesData} styleIndex={this.state.styleIndex}/></Col>
-                        <Col xs={{ span: 5 }} className=""><ProductDetails MAWproductData={this.state.MAWproductData} MAWstylesData={this.state.MAWstylesData} MAWavgRating={this.state.MAWavgRating} handleStyleIndexChange={this.handleStyleIndexChange.bind(this)}/></Col>
+                        <Col className='' md={{span: 7, offset: 1}}><ProductPictures MAWstylesData={this.state.MAWstylesData} styleIndex={this.state.styleIndex}/></Col>
+                        <Col xs={{ span: 4 }} className=""><ProductDetails MAWproductData={this.state.MAWproductData} MAWstylesData={this.state.MAWstylesData} MAWavgRating={this.state.MAWavgRating} handleStyleIndexChange={this.handleStyleIndexChange.bind(this)} styleIndex={this.state.styleIndex}/></Col>
                     </Row>
                     <Row className='mt-4'>
-                        <Col className=''><ProductParagraph MAWproductSlogan={this.state.MAWproductData.slogan} MAWproductDescription={this.state.MAWproductData.description}/></Col>
-                        <Col sm={{ span: 5, offset: 0 }} className="border-left border-dark"><ProductFactoids MAWproductFactoids={this.state.MAWproductData.features} /></Col>
+                        <Col className='' md={{span: 7, offset: 1}}><ProductParagraph MAWproductSlogan={this.state.MAWproductData.slogan} MAWproductDescription={this.state.MAWproductData.description}/></Col>
+                        <Col sm={{ span: 4, offset: 0 }} className="border-left border-dark"><ProductFactoids MAWproductFactoids={this.state.MAWproductData.features} /></Col>
                     </Row>
                 </Container>
             </div>
