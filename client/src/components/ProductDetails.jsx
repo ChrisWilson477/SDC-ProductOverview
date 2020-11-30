@@ -153,7 +153,9 @@ class ProductDetails extends React.Component {
               {sale_price}
             </Row>
           </Container>
-          <div>Style: {this.props.MAWstylesData.results[this.props.styleIndex].name}</div>
+            <div>
+              <div><b>Style: </b>{this.props.MAWstylesData.results[this.props.styleIndex].name}</div>
+            </div>
           <Container>
             <Row>
               {mappedStyleThumbnails}
