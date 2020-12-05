@@ -65,7 +65,7 @@ DROP TABLE IF EXISTS style_skus;
 
 CREATE TABLE IF NOT EXISTS style_skus (
   sku_id int NOT NULL unsigned AUTO_INCREMENT UNIQUE PRIMARY KEY,
-  product_id  int NOT NULL unsigned  FOREIGN KEY REFERENCES products(product_id),
+  style_id  int NOT NULL unsigned  FOREIGN KEY REFERENCES styles(style_id),
   XS int unsigned,
   S int unsigned,
   M int unsigned,
@@ -87,26 +87,26 @@ CREATE TABLE IF NOT EXISTS style_skus (
 
 -- create cart table
 
-DROP TABLE IF EXISTS cart;
+-- DROP TABLE IF EXISTS cart;
 
-CREATE TABLE IF NOT EXISTS cart (
-  cart_id int NOT NULL unsigned AUTO_INCREMENT UNIQUE PRIMARY KEY,
-  user_session int NOT NULL unsigned,
-  product_id int NOT NULL unsigned  FOREIGN KEY REFERENCES products(product_id),
-  active BOOLEAN NOT NULL unsigned
-);
+-- CREATE TABLE IF NOT EXISTS cart (
+--   cart_id int NOT NULL unsigned AUTO_INCREMENT UNIQUE PRIMARY KEY,
+--   user_session int NOT NULL unsigned,
+--   product_id int NOT NULL unsigned  FOREIGN KEY REFERENCES products(product_id),
+--   active BOOLEAN NOT NULL unsigned
+-- );
 
 
 -- create product rating meta join table to incorporate reviews
 
-DROP TABLE IF EXISTS product_rating_meta;
+-- DROP TABLE IF EXISTS product_rating_meta;
 
-CREATE TABLE IF NOT EXISTS cart (
-  meta_id int NOT NULL unsigned AUTO_INCREMENT UNIQUE PRIMARY KEY,
-  product_id int NOT NULL unsigned  FOREIGN KEY REFERENCES products(product_id),
-  one_star int NOT NULL unsigned,
-  two_star int NOT NULL unsigned,
-  three_star int NOT NULL unsigned,
-  four_star int NOT NULL unsigned,
-  five_star int NOT NULL unsigned
-);
+-- CREATE TABLE IF NOT EXISTS cart (
+--   meta_id int NOT NULL unsigned AUTO_INCREMENT UNIQUE PRIMARY KEY,
+--   product_id int NOT NULL unsigned  FOREIGN KEY REFERENCES products(product_id),
+--   one_star int NOT NULL unsigned,
+--   two_star int NOT NULL unsigned,
+--   three_star int NOT NULL unsigned,
+--   four_star int NOT NULL unsigned,
+--   five_star int NOT NULL unsigned
+-- );
