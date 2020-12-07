@@ -26,7 +26,7 @@ class ProductOverview extends React.Component {
     }
 
     getProductData(id) {
-        fetch(`http://52.26.193.201:3000/products/${id}`)
+        fetch(`'/products/${id}`)
             .then(data => {
             return data.json();
             })
@@ -34,7 +34,7 @@ class ProductOverview extends React.Component {
                 this.setState({MAWproductData: data})
             })
             .then(() => {
-                fetch(`http://52.26.193.201:3000/products/${id}/styles`)
+                fetch(`/products/${id}/styles`)
                 .then(data => {
                     return data.json();
                 })
@@ -42,7 +42,7 @@ class ProductOverview extends React.Component {
                     this.setState({MAWstylesData: data})
                 })
                 .then(() => {
-                    fetch(`http://52.26.193.201:3000/reviews/${id}/meta`)
+                    fetch(`/products/${id}/meta`)
                     .then(data => {
                         return data.json();
                     })

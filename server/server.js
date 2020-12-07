@@ -1,7 +1,7 @@
 // server.jsx
 const express = require('express');
-var db = require('../database-postgres');
 const app = express();
+const db = require('../database-postgres/queries');
 const PORT = 3002;
 
 app.use(express.static('../client/dist')); // Host your dist folder up to the server
@@ -17,7 +17,7 @@ app.get('/products/list', (req, res) => {
 			res.status(200).send(results);
 		}
 	})
-}
+})
 
 
 app.get('/products/:product_id', (req, res) => {
@@ -29,7 +29,7 @@ app.get('/products/:product_id', (req, res) => {
 			res.status(200).send(results);
 		}
 	})
-}
+})
 
 
 app.get('/products/:product_id', (req, res) => {
@@ -41,7 +41,7 @@ app.get('/products/:product_id', (req, res) => {
 			res.status(200).send(results);
 		}
 	})
-}
+})
 
 app.get('/products/:product_id/styles', (req, res) => {
 	let reqParams = req.params.id;
@@ -52,7 +52,7 @@ app.get('/products/:product_id/styles', (req, res) => {
 			res.status(200).send(results);
 		}
 	})
-}
+})
 
 app.get('/products/:product_id/styles', (req, res) => {
 	let reqParams = req.params.id;
@@ -63,7 +63,7 @@ app.get('/products/:product_id/styles', (req, res) => {
 			res.status(200).send(results);
 		}
 	})
-}
+})
 
 
 // Listening for requests on the PORT
