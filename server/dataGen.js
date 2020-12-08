@@ -2,7 +2,7 @@ const fs = require('fs');
 const faker = require('faker');
 
 
-const writeProducts = fs.createWriteStream('10productTest.csv');
+const writeProducts = fs.createWriteStream('products.csv');
 
 
 
@@ -10,8 +10,9 @@ const writeProducts = fs.createWriteStream('10productTest.csv');
 
 
 function writeTenMillionProducts(writer, encoding, callback) {
-  let i = 100;
+  let i = 1000000;
   let id = 0;
+  let start = Date.now();
   console.log('#:', id);
   function write() {
     let ok = true;
@@ -47,7 +48,10 @@ function writeTenMillionProducts(writer, encoding, callback) {
     }
   }
   write()
+  let end = Date.now();
+  console.log(`Execution time: ${end - start} ms`);
 }
+
 
 
 writeTenMillionProducts(writeProducts, 'utf-8', () => {
