@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest --watch",
     "env": "npm install --save-dev @babel/preset-env",
-    "start": "cd database-postgres / && nodemon server.js",
+    "start": "cd database-postgres / && node server.js",
     "build": "set NODE_ENV=dev && webpack --watch --mode=development"
   },
   "repository": {

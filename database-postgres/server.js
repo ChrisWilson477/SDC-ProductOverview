@@ -9,9 +9,9 @@ app.use(express.json()); // Alternative to BodyParser
 
 
 
-app.get('/products/list', db.getProductList)
-app.get('/products/:product_id', db.getSingleProduct)
-app.get('/products/:product_id/styles', db.getSingleProductStyles)
+app.get('http://18.218.213.181/products/list', db.getProductList)
+app.get('http://18.218.213.181/products/:product_id', db.getSingleProduct)
+app.get('http://18.218.213.181/products/:product_id/styles', db.getSingleProductStyles)
 
 
 

@@ -74,6 +74,7 @@ const getSingleProduct = (req, res) => {
 const getSingleProductStyles = (req, res) => {
   const id = req.params.product_id;
   let stylesInfo = {};
+
   //pull styles from DB
   pool.query(
     `SELECT s.style_id, s.name, s.original_price, s.sale_price, s."default?"
@@ -89,6 +90,7 @@ const getSingleProductStyles = (req, res) => {
           stylesInfo.results =[];
           styleOne = results.rows[0];
           styleTwo = results.rows[1];
+
           //pull photos from DB
           pool.query(
           `SELECT p.style_id, p.thumbnail_url, p.url
@@ -113,6 +115,7 @@ const getSingleProductStyles = (req, res) => {
               })
               styleOne.photos = photoOne;
               styleTwo.photos = photoTwo;
+
               //pull skus from DB
               pool.query(
               `SELECT ss.style_id, ss.size, ss.inStock
@@ -139,9 +142,6 @@ const getSingleProductStyles = (req, res) => {
               styleOne.skus = skuOne;
               styleTwo.skus = skuTwo;
               stylesInfo.results.push(styleOne, styleTwo)
-              console.log(stylesInfo)
-
-
               res.status(200).send(stylesInfo)
             });
           };

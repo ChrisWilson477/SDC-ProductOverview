@@ -17,8 +17,7 @@ CREATE TABLE IF NOT EXISTS products (
 DROP TABLE IF EXISTS product_features;
 
 CREATE TABLE IF NOT EXISTS product_features (
-  product_features_id int SERIAL PRIMARY KEY,
-  product_id int REFERENCES products(product_id),
+  product_id int REFERENCES products(id),
   feature varchar(25),
   value varchar(25)
 );
@@ -28,12 +27,12 @@ CREATE TABLE IF NOT EXISTS product_features (
 DROP TABLE IF EXISTS styles;
 
 CREATE TABLE IF NOT EXISTS styles (
-  product_id int,
+  product_id int REFERENCES products(id),
   style_id int,
   name varchar(50) NOT NULL,
   original_price varchar(50) NOT NULL,
   sale_price varchar(50),
-  default? int
+  "default?" int
 );
 
 
@@ -44,9 +43,9 @@ DROP TABLE IF EXISTS style_photos;
 
 CREATE TABLE IF NOT EXISTS style_photos (
   product_id int REFERENCES products(id),
-  style_id int REFERENCES styles(style_id),
+  style_id int,
   thumbnail_url varchar(5000),
-  photo_url varchar(5000)
+  url varchar(5000)
 
 );
 
@@ -80,3 +79,13 @@ CREATE TABLE IF NOT EXISTS style_skus (
 
 \COPY style_skus(product_id, style_id, size, inStock) FROM '/Users/chriswilson/Documents/GitHub/SDC-ProductOverview/database-postgres/10Mskus.csv' DELIMITER'|' CSV HEADER;
 
+
+CREATE INDEX products_product_id_idx ON products(id);
+
+CREATE INDEX product_features_product_id_idx ON product_features(product_id);
+
+CREATE INDEX styles_product_id_idx ON styles(product_id);
+
+CREATE INDEX styles_photos_product_id_idx ON style_photos(product_id);
+
+CREATE INDEX styles_skus_product_id_idx ON style_skus(product_id);

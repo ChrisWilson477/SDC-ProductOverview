@@ -6,8 +6,8 @@ const faker = require('faker');
 // const writeProducts = fs.createWriteStream('10MproductsList.csv');
 // const writeProductFeatures = fs.createWriteStream('10Mproductfeatures.csv');
 // const writeStyles = fs.createWriteStream('10Mstyles.csv');
-const writeProductPhotos = fs.createWriteStream('10Mphotos.csv');
-// const writeProductSkus = fs.createWriteStream('10Mskus.csv');
+// const writeProductPhotos = fs.createWriteStream('10Mphotos.csv');
+const writeProductSkus = fs.createWriteStream('10Mskus.csv');
 
 
 
@@ -16,7 +16,7 @@ const writeProductPhotos = fs.createWriteStream('10Mphotos.csv');
 //ProductList
 
 function writeTenMillionProducts(writer, encoding, callback) {
-  let i = 101;
+  let i = 10000001;
   let id = -1;
   console.log('#:', id);
   function write() {
@@ -66,7 +66,7 @@ function writeTenMillionProducts(writer, encoding, callback) {
 
 
 function writeTenMillionProductFeatures(writer, encoding, callback) {
-  let i = 101;
+  let i = 10000000;
   let id = 0;
   console.log('#:', id);
   function write() {
@@ -113,7 +113,7 @@ function writeTenMillionProductFeatures(writer, encoding, callback) {
 //Styles
 
 function writeTenMillionStyles(writer, encoding, callback) {
-  let i = 100;
+  let i = 10000000;
   let id = 0;
   console.log('#:', id);
   function write() {
@@ -166,7 +166,7 @@ function writeTenMillionStyles(writer, encoding, callback) {
 //Photos
 
 function writeTenMillionProductPhotos(writer, encoding, callback) {
-  let i = 100;
+  let i = 10000000;
   let id = 0;
   console.log('#:', id);
   function write() {
@@ -204,9 +204,9 @@ function writeTenMillionProductPhotos(writer, encoding, callback) {
 }
 
 
-writeTenMillionProductPhotos(writeProductPhotos, 'utf-8', () => {
-  writeProductPhotos.end();
-});
+// writeTenMillionProductPhotos(writeProductPhotos, 'utf-8', () => {
+//   writeProductPhotos.end();
+// });
 
 
 
@@ -214,7 +214,7 @@ writeTenMillionProductPhotos(writeProductPhotos, 'utf-8', () => {
 
 
 function writeTenMillionProductSkus(writer, encoding, callback) {
-  let i = 100;
+  let i = 10000000;
   let id = 0;
   console.log('#:', id);
   function write() {
@@ -228,22 +228,22 @@ function writeTenMillionProductSkus(writer, encoding, callback) {
       let style_id = 1;
       let styles = 2;
 
-  let shirtSize = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
-  let shoeSize = [  '8', '8.5', '9', '9.5', '10', '10.5'];
+  let shirtSize = [ 'S', 'M', 'L'];
+  let shoeSize = [  '8', '9', '10'];
   let inStock;
   for(var l = 0; l < styles; l++){
     style_id = style_id + l;
     if(typeOfClothing === 1){
       for(var k = 0; k < shirtSize.length; k++){
         inStock =  Math.ceil(Math.random() * 25);
-        sku = {XS: inStock, S: inStock, M: inStock, L: inStock, XL: inStock, XXL: inStock}
+        sku = { S: inStock, M: inStock, L: inStock}
         skus += `${product_id}|${style_id}|${shirtSize[k]}|${inStock} \n`
       }
     } else {
 
       for(var j = 0; j < shoeSize.length; j++){
         inStock =  Math.ceil(Math.random() * 25);
-        sku = {7: inStock, 7.5: inStock, 8: inStock, 8.5: inStock, 9: inStock, 9.5: inStock, 10: inStock, 10.5: inStock, 11: inStock}
+        sku = { 8: inStock, 9: inStock, 10: inStock}
         skus += `${product_id}|${style_id}|${shoeSize[j]}|${inStock} \n`
       }
     }
@@ -271,6 +271,6 @@ function writeTenMillionProductSkus(writer, encoding, callback) {
 }
 
 
-// writeTenMillionProductSkus(writeProductSkus, 'utf-8', () => {
-//   writeProductSkus.end();
-// });
+writeTenMillionProductSkus(writeProductSkus, 'utf-8', () => {
+  writeProductSkus.end();
+});
