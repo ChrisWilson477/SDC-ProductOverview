@@ -1,3 +1,4 @@
+
 import React from 'react';
 import helperFunctions from './HelperFunctions.js';
 import ProductParagraph from './components/ProductParagraph.jsx';
@@ -26,12 +27,14 @@ class ProductOverview extends React.Component {
     }
 
     getProductData(id) {
-        fetch(`'/products/${id}`)
+        fetch(`/products/${id}`)
             .then(data => {
             return data.json();
+
             })
             .then(data => {
                 this.setState({MAWproductData: data})
+
             })
             .then(() => {
                 fetch(`/products/${id}/styles`)
@@ -42,7 +45,7 @@ class ProductOverview extends React.Component {
                     this.setState({MAWstylesData: data})
                 })
                 .then(() => {
-                    fetch(`/products/${id}/meta`)
+                    fetch(`http://52.26.193.201:3000/reviews/${id}/meta`)
                     .then(data => {
                         return data.json();
                     })

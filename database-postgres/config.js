@@ -1,8 +1,8 @@
  module.exports = {
-  user: 'chris',
+  user: 'postgres',
   host: 'localhost',
   password: 'Postgres10!!',
-  database: 'greenfield',
-  port: 3002
+  database: 'postgres',
+  port: 5432
 
  };

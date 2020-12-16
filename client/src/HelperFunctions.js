@@ -31,7 +31,7 @@ const getProductAndStyles = function() {
 }
 
 const getAvgRating = function(id) {
-  fetch(`/products/${id}/meta`)
+  fetch(`http://52.26.193.201:3000/reviews/${id}/meta`)
   .then(data => {
     return data.json();
   })
