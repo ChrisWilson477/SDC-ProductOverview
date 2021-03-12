@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest --watch",
     "env": "npm install --save-dev @babel/preset-env",
-    "start": "cd database-postgres / && node server.js",
+    "start": "cd database-postgres / && nodemon server.js",
     "build": "set NODE_ENV=dev && webpack --watch --mode=development"
   },
   "repository": {
@@ -22,6 +22,7 @@
   "dependencies": {
     "bluebird": "^3.7.2",
     "bootstrap": "^4.5.3",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "faker": "^5.1.0",
     "glyphicons": "^0.2.0",
