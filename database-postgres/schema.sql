@@ -1,8 +1,6 @@
 
 -- main product table
-
 DROP TABLE IF EXISTS products;
-
 CREATE TABLE IF NOT EXISTS products (
   id int PRIMARY KEY,
   name varchar(50) NOT NULL,
@@ -13,9 +11,8 @@ CREATE TABLE IF NOT EXISTS products (
 
 );
 
-
+-- product_features table
 DROP TABLE IF EXISTS product_features;
-
 CREATE TABLE IF NOT EXISTS product_features (
   product_id int REFERENCES products(id),
   feature varchar(25),
@@ -23,9 +20,7 @@ CREATE TABLE IF NOT EXISTS product_features (
 );
 
 -- create a styles table
-
 DROP TABLE IF EXISTS styles;
-
 CREATE TABLE IF NOT EXISTS styles (
   product_id int REFERENCES products(id),
   style_id int,
@@ -35,49 +30,34 @@ CREATE TABLE IF NOT EXISTS styles (
   "default?" int
 );
 
-
 --Style Photos
-
-
 DROP TABLE IF EXISTS style_photos;
-
 CREATE TABLE IF NOT EXISTS style_photos (
   product_id int REFERENCES products(id),
   style_id int,
   thumbnail_url varchar(5000),
   url varchar(5000)
-
 );
 
-
-
 --Style Skus
-
-
 DROP TABLE IF EXISTS style_skus;
-
 CREATE TABLE IF NOT EXISTS style_skus (
   product_id int REFERENCES products(id),
   style_id int,
   size varchar(25),
-  inStock int
+  instock int
 );
 
 
+\COPY products(id, name, slogan, description, category, default_price) FROM '/home/ubuntu/data/10MproductsList.csv' DELIMITER'|' CSV HEADER;
 
+\COPY product_features(product_id, feature, value) FROM '/home/ubuntu/data/10Mproductfeatures.csv' DELIMITER'|' CSV HEADER;
 
+\COPY styles(product_id, style_id, name, original_price, sale_price, "default?") FROM '/home/ubuntu/data/10Mstyles.csv' DELIMITER'|' CSV HEADER;
 
+\COPY style_photos(product_id, style_id, thumbnail_url, url) FROM '/home/ubuntu/data/10Mphotos.csv' DELIMITER'|' CSV HEADER;
 
-
-\COPY products(id, name, slogan, description, category, default_price) FROM '/Users/chriswilson/Documents/GitHub/SDC-ProductOverview/database-postgres/10MproductsList.csv' DELIMITER'|' CSV HEADER;
-
-\COPY product_features(product_id, feature, value) FROM '/Users/chriswilson/Documents/GitHub/SDC-ProductOverview/database-postgres/10Mproductfeatures.csv' DELIMITER'|' CSV HEADER;
-
-\COPY styles(product_id, style_id, name, original_price, sale_price, "default?") FROM '/Users/chriswilson/Documents/GitHub/SDC-ProductOverview/database-postgres/10Mstyles.csv' DELIMITER'|' CSV HEADER;
-
-\COPY style_photos(product_id, style_id, thumbnail_url, url) FROM '/Users/chriswilson/Documents/GitHub/SDC-ProductOverview/database-postgres/10Mphotos.csv' DELIMITER'|' CSV HEADER;
-
-\COPY style_skus(product_id, style_id, size, inStock) FROM '/Users/chriswilson/Documents/GitHub/SDC-ProductOverview/database-postgres/10Mskus.csv' DELIMITER'|' CSV HEADER;
+\COPY style_skus(product_id, style_id, size, inStock) FROM '/home/ubuntu/data/10Mskus.csv' DELIMITER'|' CSV HEADER;
 
 
 CREATE INDEX products_product_id_idx ON products(id);
