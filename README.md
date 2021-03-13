@@ -2,7 +2,7 @@
 
 This project contains a Node/Express/Postgres/Docker project I made on legacy code for a eCommerce front-end Website overviewing specific projects
 
-# Running the Project
+# Running the Project Locally
 
 TO spin up the Dockerized Database, use the following command in your terminal:
 
