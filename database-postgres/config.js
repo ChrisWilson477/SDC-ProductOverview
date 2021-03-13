@@ -3,5 +3,4 @@
   host: 'localhost',
   database: 'postgres',
   port: 5432
-
  };

@@ -1,16 +1,16 @@
 const fs = require('fs');
 const faker = require('faker');
 
-const writeProducts = fs.createWriteStream('10MproductsList.csv');
-const writeProductFeatures = fs.createWriteStream('10Mproductfeatures.csv');
-const writeStyles = fs.createWriteStream('10Mstyles.csv');
-const writeProductPhotos = fs.createWriteStream('10Mphotos.csv');
-const writeProductSkus = fs.createWriteStream('10Mskus.csv');
+const writeProducts = fs.createWriteStream('productsList.csv');
+const writeProductFeatures = fs.createWriteStream('productfeatures.csv');
+const writeStyles = fs.createWriteStream('styles.csv');
+const writeProductPhotos = fs.createWriteStream('photos.csv');
+const writeProductSkus = fs.createWriteStream('skus.csv');
 
 //ProductList
 function writeTenMillionProducts(writer, encoding, callback) {
-	let i = 101;
-	let id = -1;
+	let i = 100;
+	let id = 0;
 	console.log('#:', id);
 	function write() {
 		let ok = true;
@@ -45,7 +45,7 @@ writeTenMillionProducts(writeProducts, 'utf-8', () => {
 //Features
 function writeTenMillionProductFeatures(writer, encoding, callback) {
 	let i = 100;
-	let id = -1;
+	let id = 0;
 	console.log('#:', id);
 	function write() {
 		let ok = true;
@@ -81,7 +81,7 @@ writeTenMillionProductFeatures(writeProductFeatures, 'utf-8', () => {
 //Styles
 function writeTenMillionStyles(writer, encoding, callback) {
 	let i = 100;
-	let id = -1;
+	let id = 0;
 	console.log('#:', id);
 	function write() {
 		let ok = true;
@@ -122,7 +122,7 @@ writeTenMillionStyles(writeStyles, 'utf-8', () => {
 //Photos
 function writeTenMillionProductPhotos(writer, encoding, callback) {
 	let i = 100;
-	let id = -1;
+	let id = 0;
 	console.log('#:', id);
 	function write() {
 		let ok = true;
@@ -160,7 +160,7 @@ writeTenMillionProductPhotos(writeProductPhotos, 'utf-8', () => {
 //Skus
 function writeTenMillionProductSkus(writer, encoding, callback) {
 	let i = 100;
-	let id = -1;
+	let id = 0;
 	console.log('#:', id);
 	function write() {
 		let ok = true;
