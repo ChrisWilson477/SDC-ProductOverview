@@ -15,11 +15,11 @@ const getProductList = (req, res) => {
     `SELECT *
       FROM products
       LIMIT $1
-      `,
+     `,
     [10],
     (err, results, fields) => {
       if (err) {
-        throw err;
+       throw err;
       }
       res.status(200).send(results.rows);
     },
