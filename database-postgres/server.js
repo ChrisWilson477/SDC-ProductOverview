@@ -7,9 +7,35 @@ const cors = require('cors');
 app.use(express.static('../client/dist')); // Host your dist folder up to the server
 app.use(express.json()); // Alternative to BodyParser
 
-app.get('/products/list', db.getProductList);
+
+
+//Routes
+app.get('/products/list', async (req, res) => {
+    try {
+      let productList = await db.getProductList();
+        res.status(200).json(productList);
+
+    } catch (err) {
+        console.log(err.message)
+    }
+});
+
+
+
+
+
+
 app.get('/products/:product_id', db.getSingleProduct);
+
+
+
+
 app.get('/products/:product_id/styles', db.getSingleProductStyles);
+
+
+
+
+
 
 // Listening for requests on the PORT
 app.listen(PORT, () => {

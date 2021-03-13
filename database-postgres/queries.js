@@ -4,27 +4,38 @@ let postgresConfig = require('./config.js');
 
 const pool = new Pool(postgresConfig);
 
-
-
-pool.connect();
-
 //Get all products list
-const getProductList = (req, res) => {
-  //Pull product list from DB with limit so doesnt crash server
-  pool.query(
-    `SELECT *
-      FROM products
-      LIMIT $1
-     `,
-    [10],
-    (err, results, fields) => {
-      if (err) {
-       throw err;
-      }
-      res.status(200).send(results.rows);
-    },
-  );
+//Pull product list from DB with limit so doesnt crash server
+const getProductList = () => {
+  let productList = pool.query(`SELECT * FROM products LIMIT $1`, [
+    5,
+  ]);
+  return new Promise((resolve, reject) => {
+    productList
+      .then((result) => {
+        resolve(result.rows);
+      })
+      .catch((err) =>
+        console.error('Error executing query', err.stack),
+      );
+  });
+
 };
+
+//   pool.query(
+//     `SELECT *
+//       FROM products
+//       LIMIT $1
+//      `,
+//     [10],
+//     (err, results, fields) => {
+//       if (err) {
+//        throw err;
+//       }
+//       res.status(200).send(results.rows);
+//     },
+//   );
+// };
 
 //get single product with a product i
 const getSingleProduct = (req, res) => {
@@ -144,6 +155,8 @@ const getSingleProductStyles = (req, res) => {
     },
   );
 };
+
+
 
 module.exports = {
   getProductList,

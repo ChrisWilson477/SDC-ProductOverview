@@ -4,7 +4,7 @@ This project contains a Node/Express/Postgres/Docker project I made on legacy co
 
 # Running the Project Locally
 
-TO spin up the Dockerized Database, use the following command in your terminal:
+To spin up the Dockerized Database, use the following command in your terminal:
 
 docker run --rm -it -v "/Users/chriswilson/Documents/GitHub/SDC-ProductOverview/pgdata:/var/lib/postgresql/data" -v "$(pwd):/var/sdc" -p 5432:5432 sdc-pg
 
