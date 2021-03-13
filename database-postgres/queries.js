@@ -3,6 +3,9 @@ const { Pool } = require('pg');
 let postgresConfig = require('./config.js');
 
 const pool = new Pool(postgresConfig);
+
+
+
 pool.connect();
 
 //Get all products list
