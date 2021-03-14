@@ -19,61 +19,34 @@ const getProductList = () => {
         console.error('Error executing query', err.stack),
       );
   });
-
 };
-
-//   pool.query(
-//     `SELECT *
-//       FROM products
-//       LIMIT $1
-//      `,
-//     [10],
-//     (err, results, fields) => {
-//       if (err) {
-//        throw err;
-//       }
-//       res.status(200).send(results.rows);
-//     },
-//   );
-// };
 
 //get single product with a product i
-const getSingleProduct = (req, res) => {
-  const id = req.params.product_id;
-  let productInfo = {};
-  //pull product info from DB
-  pool.query(
-    `SELECT *
-    FROM products p
-    WHERE p.id =$1
-    `,
+
+const getSingleProduct = (id) => {
+  let singleProduct = pool.query(
+    `SELECT * FROM products WHERE id=$1`,
     [id],
-    (err, results, fields) => {
-      if (err) {
-        throw err;
-      } else {
-        productInfo = results['rows'][0];
-        productInfo['features'] = [];
-        const id = req.params.product_id;
-        //pull features from DB
-        pool.query(
-          `SELECT feature, value
-              FROM product_features
-              WHERE product_id = $1
-              `,
-          [id],
-          (err, results, fields) => {
-            if (err) {
-              throw err;
-            }
-            productInfo['features'].push(results['rows'][0]);
-            res.status(200).send(productInfo);
-          },
-        );
-      }
-    },
   );
+  let featuresAndValues = pool.query(
+    `SELECT feature, value FROM product_features WHERE product_id=$1`,
+    [id],
+  );
+  return new Promise((resolve, reject) => {
+    singleProduct.then(async (result) => {
+      let product = result.rows;
+       product[0]['features'] =  await featuresAndValues.then(
+        (data) => {
+          return data.rows;
+        },
+      );
+      resolve(product);
+    });
+  }).catch((err) => {
+    console.error('Error executing query', err.stack);
+  });
 };
+
 
 //get single product styles with sku and photos
 const getSingleProductStyles = (req, res) => {
@@ -155,8 +128,6 @@ const getSingleProductStyles = (req, res) => {
     },
   );
 };
-
-
 
 module.exports = {
   getProductList,

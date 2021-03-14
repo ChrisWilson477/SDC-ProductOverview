@@ -10,24 +10,27 @@ app.use(express.json()); // Alternative to BodyParser
 
 
 //Routes
+//Product List
 app.get('/products/list', async (req, res) => {
     try {
       let productList = await db.getProductList();
         res.status(200).json(productList);
-
     } catch (err) {
         console.log(err.message)
     }
 });
 
 
-
-
-
-
-app.get('/products/:product_id', db.getSingleProduct);
-
-
+//Single Product with Features and Values
+app.get('/products/list/:product_id', async (req, res) => {
+    try {
+      let {product_id} = req.params;
+      let singleProduct = await db.getSingleProduct(product_id);
+        res.status(200).json(singleProduct);
+    } catch (err) {
+        console.log(err.message)
+    }
+});
 
 
 app.get('/products/:product_id/styles', db.getSingleProductStyles);
