@@ -8,7 +8,7 @@ const pool = new Pool(postgresConfig);
 //Pull product list from DB with limit so doesnt crash server
 const getProductList = () => {
   let productList = pool.query(`SELECT * FROM products LIMIT $1`, [
-    5,
+    10,
   ]);
   return new Promise((resolve, reject) => {
     productList
@@ -21,8 +21,7 @@ const getProductList = () => {
   });
 };
 
-//get single product with a product i
-
+//get single product with a product id
 const getSingleProduct = (id) => {
   let singleProduct = pool.query(
     `SELECT * FROM products WHERE id=$1`,
@@ -35,7 +34,7 @@ const getSingleProduct = (id) => {
   return new Promise((resolve, reject) => {
     singleProduct.then(async (result) => {
       let product = result.rows;
-       product[0]['features'] =  await featuresAndValues.then(
+      product[0]['features'] = await featuresAndValues.then(
         (data) => {
           return data.rows;
         },
@@ -47,87 +46,69 @@ const getSingleProduct = (id) => {
   });
 };
 
-
-//get single product styles with sku and photos
-const getSingleProductStyles = (req, res) => {
-  const id = req.params.product_id;
-  let stylesInfo = {};
-  //pull styles from DB
-  pool.query(
-    `SELECT s.style_id, s.name, s.original_price, s.sale_price, s."default?"
-    FROM styles s
-    WHERE s.product_id=$1
-    `,
+//get single product styles with a product id
+const getSingleProductStyles = (id) => {
+  let styles = pool.query(
+    `SELECT style_id, name, original_price, sale_price, "default?" FROM styles WHERE product_id = $1`,
     [id],
-    (err, results, fields) => {
-      if (err) {
-        throw err;
-      } else {
-        stylesInfo.product_id = id;
-        stylesInfo.results = [];
-        styleOne = results.rows[0];
-        styleTwo = results.rows[1];
-
-        //pull photos from DB
-        pool.query(
-          `SELECT p.style_id, p.thumbnail_url, p.url
-          FROM style_photos p
-          WHERE p.product_id=$1
-          `,
-          [id],
-          (err, results, fields) => {
-            if (err) {
-              throw err;
-            } else {
-              let photoOne = [];
-              let photoTwo = [];
-              results.rows.map((row) => {
-                if (row.style_id === 1) {
-                  delete row.style_id;
-                  photoOne.push(row);
-                } else if (row.style_id === 2) {
-                  delete row.style_id;
-                  photoTwo.push(row);
-                }
-              });
-              styleOne.photos = photoOne;
-              styleTwo.photos = photoTwo;
-
-              //pull skus from DB
-              pool.query(
-                `SELECT ss.style_id, ss.size, ss.inStock
-              FROM style_skus ss
-              WHERE ss.product_id=$1
-              `,
-                [id],
-                (err, results, fields) => {
-                  if (err) {
-                    throw err;
-                  }
-                  let skuOne = {};
-                  let skuTwo = {};
-                  results.rows.map((row) => {
-                    if (row.style_id === 1) {
-                      delete row.style_id;
-                      skuOne[row.size] = row.instock;
-                    } else if (row.style_id === 2) {
-                      delete row.style_id;
-                      skuTwo[row.size] = row.instock;
-                    }
-                  });
-                  styleOne.skus = skuOne;
-                  styleTwo.skus = skuTwo;
-                  stylesInfo.results.push(styleOne, styleTwo);
-                  res.status(200).send(stylesInfo);
-                },
-              );
-            }
-          },
-        );
-      }
-    },
   );
+  let photos = pool.query(
+    `SELECT style_id, thumbnail_url, url FROM style_photos WHERE product_id=$1`,
+    [id],
+  );
+  let skus = pool.query(
+    `SELECT style_id, size, inStock FROM style_skus WHERE product_id=$1`,
+    [id],
+  );
+
+  return new Promise((resolve, reject) => {
+    let styleInfo = {};
+    styleInfo['product_id'] = id;
+    styleInfo['results'] = [];
+    styles.then(async (result) => {
+      let productStyle = result.rows;
+      let productStyleOne = result.rows[0];
+      let productStyleTwo = result.rows[1];
+      let photoOne = [];
+      let photoTwo = [];
+      let skuOne = {};
+      let skuTwo = {};
+      await photos.then((photoData) => {
+        photoData.rows.map((row) => {
+          if(row.style_id === 1){
+            delete row.style_id
+            photoOne.push(row)
+            productStyleOne['photos'] = photoOne;
+          } else if(row.style_id === 2){
+            delete row.style_id
+            photoTwo.push(row)
+            productStyleTwo['photos'] = photoTwo;
+          }
+        })
+      });
+      await skus.then((skuData) => {
+        {console.log(skuData)}
+        skuData.rows.map((row) => {
+          if(row.style_id === 1){
+            delete row.style_id
+            skuOne[row.size] = row.instock
+            productStyleOne['skus'] = skuOne;
+          } else if(row.style_id === 2){
+            delete row.style_id
+            skuTwo[row.size] = row.instock
+            productStyleTwo['skus'] = skuTwo;
+          }
+        })
+      });
+      styleInfo['results'].push(productStyleOne, productStyleTwo);
+      resolve(styleInfo);
+    });
+  }).catch((err) => {
+    console.error('Error executing query', err.stack);
+  });
 };
+
+
 
 module.exports = {
   getProductList,

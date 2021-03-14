@@ -7,7 +7,7 @@ const pool =  new Pool(postgresConfig);
 
 const db = require('./queries');
 
-let singleProd = db.getSingleProduct(5);
+let singleProd = db.getSingleProductStyles(5);
 singleProd.then((rows) => {
   console.log(rows);
 })
