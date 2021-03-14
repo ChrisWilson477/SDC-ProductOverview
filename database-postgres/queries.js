@@ -75,30 +75,32 @@ const getSingleProductStyles = (id) => {
       let skuTwo = {};
       await photos.then((photoData) => {
         photoData.rows.map((row) => {
-          if(row.style_id === 1){
-            delete row.style_id
-            photoOne.push(row)
+          if (row.style_id === 1) {
+            delete row.style_id;
+            photoOne.push(row);
             productStyleOne['photos'] = photoOne;
-          } else if(row.style_id === 2){
-            delete row.style_id
-            photoTwo.push(row)
+          } else if (row.style_id === 2) {
+            delete row.style_id;
+            photoTwo.push(row);
             productStyleTwo['photos'] = photoTwo;
           }
-        })
+        });
       });
       await skus.then((skuData) => {
-        {console.log(skuData)}
+        {
+          console.log(skuData);
+        }
         skuData.rows.map((row) => {
-          if(row.style_id === 1){
-            delete row.style_id
-            skuOne[row.size] = row.instock
+          if (row.style_id === 1) {
+            delete row.style_id;
+            skuOne[row.size] = row.instock;
             productStyleOne['skus'] = skuOne;
-          } else if(row.style_id === 2){
-            delete row.style_id
-            skuTwo[row.size] = row.instock
+          } else if (row.style_id === 2) {
+            delete row.style_id;
+            skuTwo[row.size] = row.instock;
             productStyleTwo['skus'] = skuTwo;
           }
-        })
+        });
       });
       styleInfo['results'].push(productStyleOne, productStyleTwo);
       resolve(styleInfo);
@@ -107,8 +109,6 @@ const getSingleProductStyles = (id) => {
     console.error('Error executing query', err.stack);
   });
 };
-
-
 
 module.exports = {
   getProductList,
