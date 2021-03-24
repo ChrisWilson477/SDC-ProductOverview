@@ -108,7 +108,7 @@ class ProductOverview extends React.Component {
                     </Row>
                     <Row className='mt-4'>
                         <Col className='' md={{span: 7, offset: 1}}><ProductParagraph MAWproductSlogan={this.state.MAWproductData.slogan} MAWproductDescription={this.state.MAWproductData.description}/></Col>
-                        <Col sm={{ span: 4, offset: 0 }} className="border-left border-dark"><ProductFactoids MAWproductFactoids={this.state.MAWproductData.features} /></Col>
+                        {/* <Col sm={{ span: 4, offset: 0 }} className="border-left border-dark"><ProductFactoids MAWproductFactoids={this.state.MAWproductData.features} /></Col> */}
                     </Row>
                 </Container>
             </div>
